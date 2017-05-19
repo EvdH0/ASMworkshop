@@ -8,11 +8,14 @@ Instructors:
 - Mostafa Ellabaan
 
 # Timetable
-- Morten Sommer:  Introduction to antibiotic resistome
-- Lejla Imamovic:  Resistome profiling  (from the lab to databases, overview of the data and analysis to be used during the workshop)
-- Mostafa Ellabaan: Code examples
-- Eric van der Helm:  Rapid resistome profiling using Nanopore sequencing
-- Morten Sommer:  Antibiotic resistance gene exchange networks
+- 12:30 Morten Sommer:  Introduction to antibiotic resistome
+- 12:45 Lejla Imamovic:  Resistome profiling  (from the lab to databases, overview of the data and analysis to be used during the workshop)
+- 13:00 Mostafa Ellabaan: Code examples part 1
+- 13:30 break
+- 13:45 Code examples part 2
+- 14:45 break
+- 15:30 Eric van der Helm:  Rapid resistome profiling using Nanopore sequencing
+- 15:45 Morten Sommer:  Antibiotic resistance gene exchange networks
 
 # Tasks
 - Task 1.      Introduce basic command line and tools how to get the data on/off server
