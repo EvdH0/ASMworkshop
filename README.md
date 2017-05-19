@@ -1,12 +1,17 @@
 ## ASM Microbe '17 workshop
 Room 365
+Instructors:
+- [Morten Sommer](https://twitter.com/moasommer)
+- Lejla Imamovic
+- [Eric van der Helm](https://twitter.com/EricvdHelm)
+- Mostafa Ellabaan
 
 # Timetable
 - Morten Sommer:  Introduction to antibiotic resistome
 - Lejla Imamovic:  Resistome profiling 
 (from the lab to databases, overview of the data and analysis to be used during the workshop)
-- Mostafa Ellabaan (with Eric’s & Lejla’s help):
-Task 1.        Introduce basic command line and tools how to get the data on/off server
+- Mostafa Ellabaan
+-- Task 1.        Introduce basic command line and tools how to get the data on/off server
       Output 1:   Ability to use basic commands needed for the workshop (data, database locations etc)
 
 Task 2.        Assign ORFs in GeneMark for selected dataset ((MinION last run)
