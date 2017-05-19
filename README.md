@@ -1,7 +1,7 @@
 ## ASM Microbe '17 workshop
 _Room 365_
 
-Instructors:
+# Instructors:
 - [Morten Sommer](https://twitter.com/moasommer)
 - Lejla Imamovic
 - [Eric van der Helm](https://twitter.com/EricvdHelm)
