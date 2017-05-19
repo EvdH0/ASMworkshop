@@ -1,7 +1,7 @@
 ## ASM Microbe '17 workshop
 _Room 365_
 
-# Instructors:
+# Instructors
 - [Morten Sommer](https://twitter.com/moasommer)
 - Lejla Imamovic
 - [Eric van der Helm](https://twitter.com/EricvdHelm)
@@ -44,6 +44,7 @@ If there is time left, annotate ORFs against optimal databases using plasmid dat
 We can use megablast to map the nt ORFs to plasmid database.
 # Content
 - [1. Login on amazon cloud](#foo)
+- [2. Prepare directories](#foo)
 - [2. Genemark](#foo)
 - [3. Resfinder](#foo)
 - [4. CARD](#card)
@@ -51,9 +52,9 @@ We can use megablast to map the nt ORFs to plasmid database.
 
 # Workshop
 
-## 1. Login in to the amazon cloud
+## 1. Login in to the Amazon cloud
 
-## Prepare your directories
+## 2. Prepare your directories
 ```shell
 mkdir ASM cd ASM mkdir Databases Programs Data Scripts
 ls
@@ -63,7 +64,7 @@ ls $ASM
 ```
 
 
-## 2. Finding Open Reading Frames (ORFs)
+## 3. Finding Open Reading Frames (ORFs)
 ### Installation of Genemark
 - Go to http://exon.gatech.edu/Genemark/ and search for programs and click on the link it will take you to http://exon.gatech.edu/Genemark/license_download.cgi 
 - Select GeneMarkS v.4.30 and LINUX 64 and fill the form then click on the button "I agree to the terms of this license agreement" 
@@ -152,7 +153,7 @@ awk -F"\t" ' BEGIN {print "ORFID\tGENMarksORFID\tDescription\tsequence"}
 ```
 
 
-## 3. The first database, Resfinder
+## 4. The first database, Resfinder
 
 ### Installation of Resfinder
 ```shell
@@ -292,7 +293,7 @@ JoinTwoFilesBasedOnKeys.sh 2 1 $ASM/Databases/Resfinder/Resfinder.gene.class orf
 ```
 
 
-## 4. CARD
+## 5. CARD
 
 ### Install the CARD database
 ```shell
