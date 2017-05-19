@@ -2,10 +2,10 @@
 Room 365
 
 # Timetable
-Morten Sommer:  Introduction to antibiotic resistome
-Lejla Imamovic:  Resistome profiling 
+- Morten Sommer:  Introduction to antibiotic resistome
+- Lejla Imamovic:  Resistome profiling 
 (from the lab to databases, overview of the data and analysis to be used during the workshop)
-Mostafa Ellabaan (with Eric’s & Lejla’s help):
+- Mostafa Ellabaan (with Eric’s & Lejla’s help):
 Task 1.        Introduce basic command line and tools how to get the data on/off server
       Output 1:   Ability to use basic commands needed for the workshop (data, database locations etc)
 
@@ -31,8 +31,8 @@ Task 6.       Annotate protein sequences using hmm model in Pfam
 If there is time left, annotate ORFs against optimal databases using plasmid database (to look for mobility). 
 We can use megablast to map the nt ORFs to plasmid database.
 
-Eric van der Helm:  Rapid resistome profiling using Nanopore sequencing
-Morten Sommer:  Antibiotic resistance gene exchange networks
+- Eric van der Helm:  Rapid resistome profiling using Nanopore sequencing
+- Morten Sommer:  Antibiotic resistance gene exchange networks
 
 # Workshop
 
