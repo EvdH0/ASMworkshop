@@ -1,5 +1,6 @@
 ## ASM Microbe '17 workshop
-Room 365
+_Room 365_
+
 Instructors:
 - [Morten Sommer](https://twitter.com/moasommer)
 - Lejla Imamovic
@@ -8,47 +9,46 @@ Instructors:
 
 # Timetable
 - Morten Sommer:  Introduction to antibiotic resistome
-- Lejla Imamovic:  Resistome profiling 
-(from the lab to databases, overview of the data and analysis to be used during the workshop)
-- Mostafa Ellabaan
--- Task 1.        Introduce basic command line and tools how to get the data on/off server
+- Lejla Imamovic:  Resistome profiling  (from the lab to databases, overview of the data and analysis to be used during the workshop)
+- Mostafa Ellabaan: Code examples
+- Eric van der Helm:  Rapid resistome profiling using Nanopore sequencing
+- Morten Sommer:  Antibiotic resistance gene exchange networks
+
+# Tasks
+- Task 1.      Introduce basic command line and tools how to get the data on/off server
       Output 1:   Ability to use basic commands needed for the workshop (data, database locations etc)
 
-Task 2.        Assign ORFs in GeneMark for selected dataset ((MinION last run)
+- Task 2.        Assign ORFs in GeneMark for selected dataset ((MinION last run)
       Output 2:    Protein (pro) and nucleotide (nt) sequences in fasta format
       Question:    How many ORFs are predicted?
-      Task 3.        Format databases (e.g. CARD nt and pro or Resfinder nucletide)
+- Task 3.        Format databases (e.g. CARD nt and pro or Resfinder nucletide)
       Output 3:    Database for further use, knowledge on importance of databases
                            Also mention  that one can curate their own database  
                            Task 4A.     Annotate insert nt sequences with Resfinder online server (promote DTU)
-Task 4B.      Annotate ORFs nt sequences against Resfinder database (blastn)
+- Task 4B.      Annotate ORFs nt sequences against Resfinder database (blastn)
       Output 4:    Manually curated horizontally transferred list of genes from inserts/contigs  and ORFs. 
       Questions:  How many inserts have antibiotic resistance gene?
                             Is there a difference between DTU web server (contig) (4A) and annotated ORFs (4B)?
-Task 5.       Annotate protein sequences against CARD protein database
+                            - Task 5.       Annotate protein sequences against CARD protein database
       Output 5:   List of antibiotic resistance genes from ORFs. 
       Questions: How many inserts have antibiotic resistance gene? 
                            Input from participant of interesting hits?
 
-Task 6.       Annotate protein sequences using hmm model in Pfam 
+- Task 6.       Annotate protein sequences using hmm model in Pfam 
       Output 6:   List of genes from ORFs. 
       Questions: What can we see from Pfam domain list?
 If there is time left, annotate ORFs against optimal databases using plasmid database (to look for mobility). 
 We can use megablast to map the nt ORFs to plasmid database.
-
-- Eric van der Helm:  Rapid resistome profiling using Nanopore sequencing
-- Morten Sommer:  Antibiotic resistance gene exchange networks
-
 # Content
-[Login on amazon cloud](#foo)
-[Genemark](#foo)
-[Resfinder](#foo)
-[CARD](#card)
+- [1. Login on amazon cloud](#foo)
+- [2. Genemark](#foo)
+- [3. Resfinder](#foo)
+- [4. CARD](#card)
 
 
 # Workshop
 
-## Login in to the amazon cloud
+## 1. Login in to the amazon cloud
 
 ## Prepare your directories
 ```shell
@@ -60,7 +60,7 @@ ls $ASM
 ```
 
 
-## Finding Open Reading Frames (ORFs)
+## 2. Finding Open Reading Frames (ORFs)
 ### Installation of Genemark
 - Go to http://exon.gatech.edu/Genemark/ and search for programs and click on the link it will take you to http://exon.gatech.edu/Genemark/license_download.cgi 
 - Select GeneMarkS v.4.30 and LINUX 64 and fill the form then click on the button "I agree to the terms of this license agreement" 
@@ -149,7 +149,7 @@ awk -F"\t" ' BEGIN {print "ORFID\tGENMarksORFID\tDescription\tsequence"}
 ```
 
 
-## The first database, Resfinder
+## 3. The first database, Resfinder
 
 ### Installation of Resfinder
 ```shell
@@ -289,7 +289,7 @@ JoinTwoFilesBasedOnKeys.sh 2 1 $ASM/Databases/Resfinder/Resfinder.gene.class orf
 ```
 
 
-## CARD
+## 4. CARD
 
 ### Install the CARD database
 ```shell
