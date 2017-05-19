@@ -54,7 +54,7 @@ ls $ASM
 - Select GeneMarkS v.4.30 and LINUX 64 and fill the form then click on the button "I agree to the terms of this license agreement" 
 - Download both the program and the key
 
-```
+```shell
 cd $ASM/Programs
 mkdir GenMarkS
 cd GenMarkS
@@ -93,7 +93,7 @@ source ~/.bashrc
 ```
 
 ### Running genemark
-```
+```shell
 ## to see options available just write this 
 cd $ASM/Data
 
@@ -140,7 +140,7 @@ awk -F"\t" ' BEGIN {print "ORFID\tGENMarksORFID\tDescription\tsequence"}
 ## The first database, Resfinder
 
 ### Installation of Resfinder
-```
+```shell
 ## to download the most updated version of resfinder
 mkdir $ASM/Databases/Resfinder
 cd $ASM/Databases/Resfinder
@@ -210,7 +210,7 @@ source ~/.bashrc
 ### Install the BLAST tool
 To download blast visit page https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 
-```
+```shell
 cd $ASM/Programs
 mkdir blast
 cd blast
@@ -227,15 +227,14 @@ md5sum --check ncbi-blast-2.6.0+-src.tar.gz.md5
 ## you should see "ncbi-blast-2.6.0+-src.tar.gz: OK"
 ```
 
-```
-
+```shell
 cd  ncbi-blast-2.6.0+-src/c++
 ./configure --prefix=$(pwd)
 time make
 time make install
 ```
 ### Run Resfinder
-```
+```shell
 cd $ASM/Data
 mkdir Resfinder
 cd Resfinder
@@ -264,7 +263,7 @@ $blastExecFolder/blastx -query ../orfs.nucleotide.fa -db $RESFINDERProt -outfmt 
  ```
  
  ### Next?
- ```
+```shell
  ## fruther annotation
 ## maping gene to class
 
@@ -281,7 +280,7 @@ JoinTwoFilesBasedOnKeys.sh 2 1 $ASM/Databases/Resfinder/Resfinder.gene.class orf
 ## CARD
 
 ### Install the CARD database
-```
+```shell
 # getting and installing
 cd $ASM/Databases
 mkdir CARD
@@ -295,7 +294,7 @@ wget https://card.mcmaster.ca/download/0/broadstreet-v1.1.8.tar.gz
 tar -xvf broadstreet-v1.1.8.tar.gz
 ```
 
-```
+```shell
 cat nucleotide_fasta_*pro*homo* > ../All.CARD.NA.fa
 cat protein_fasta_* > ../All.CARD.AA.fa
 mkdir blastNA blastAA
@@ -325,7 +324,7 @@ source ~/.bashrc
 ```
 
 ### Run the CARD database
-```
+```shell
 ## Run CARD databses
 
 cd $ASM/Data
