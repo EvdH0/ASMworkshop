@@ -61,6 +61,9 @@ You can download it from this website https://www.chiark.greenend.org.uk/~sgtath
  load the cloud machine private key "ASMWorkshopKey.pem" that will be announced here later. 
  and generate a private key and save it at c:/ASMWorkshop.ppk
  
+ >> make login: ASM2017
+ 
+ 
  Run puTTy on 
  
       Session: 
@@ -72,7 +75,9 @@ You can download it from this website https://www.chiark.greenend.org.uk/~sgtath
                   Private key file for authentication: c:/ASMWorkshop.ppk
  
  
- 
+ >> when the puTTy run you should type  ASM2017 
+ >> Note that linux does not show any change while typing of password. so it is your responsibility to remember to put 
+ >> ASM2017 right and in order.
 
 
 ## 2. Prepare your directories
@@ -160,19 +165,7 @@ grep ">"  orfs.protein.fa  | wc -l
 grep ">"  orfs.nucleotide.fa | wc -l
 
 
-## OPTIONAL 
 
-cat orfs.nucleotide.fa | sed 's/%//g' | 
-awk -F"\n" '{if( index($1,">") > 0) {printf "\n"$1"\t"} else {printf $1}}' | 
-awk -F" " '{print substr($1,2,length($1))"\t"$0}' | awk '{print $0}' | 
-awk -F"\t" 'BEGIN {print "ORFID\tGENMarksORFID\tDescription\tsequence"}
-{if(FNR>1) print "ORFID"FNR-1"\t"$0}' > orfs.nucleotide.tab
-
-cat  orfs.protein.fa | sed 's/%//g' | 
-awk -F"\n" '{if( index($1,">") > 0) {printf "\n"$1"\t"} else {printf $1}}' | 
-awk -F" " '{print substr($1,2,length($1))"\t"$0}' | awk '{print $0}' | 
-awk -F"\t" ' BEGIN {print "ORFID\tGENMarksORFID\tDescription\tsequence"}
-{if(FNR>1) print "ORFID"FNR-1"\t"$0}' > orfs.protein.tab
 ```
 
 ### Install the BLAST tool
