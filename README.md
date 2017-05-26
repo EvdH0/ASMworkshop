@@ -336,9 +336,6 @@ tar -xvf broadstreet-v1.1.8.tar.gz
 
 ls 
 
-## compiling blast protein database for CARD
-cd blastAA
-
 ## to show the card nucleotide fasta files
 ls nucleotide_fasta_*
 
@@ -353,15 +350,7 @@ cat protein_fasta_* > ../All.CARD.AA.fa
 ```shell
 ## to insure that you are at the right place.
 cd ~/Databases/CARD/
-
 mkdir blastNA blastAA
-
-
-
-
-cd ..
-mkdir blastNA blastAA
-
 
 ## compiling blast protein database for CARD
 cd blastAA
