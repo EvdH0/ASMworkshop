@@ -57,14 +57,16 @@ We can use megablast to map the nt ORFs to plasmid database.
 You can download it from this website https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html.
  install this "putty-64bit-0.69-installer.msi" on your machine. 
  
- run puTTYgen. 
+ #Run puTTYgen. 
  load the cloud machine private key "ASMWorkshopKey.pem" that will be announced here later. 
  and generate a private key and save it at c:/ASMWorkshop.ppk
  
- >> make login: ASM2017
+ fill the following
+ >> Key passphrase: ASM2017
+ >> Confirm passphrase: ASM2017
  >> Type of the key to generate :: choose SSH-1 (RSA)
  
- Run puTTy on 
+ #Run puTTy on 
  
       Session: 
              Host Name: ec2-user@ec2-34-223-205-112.us-west-2.compute.amazonaws.com
