@@ -339,6 +339,8 @@ ls
 ```
 
 ```shell
+## to insure that you are at the right place.
+cd ~/Databases/CARD/
 cat nucleotide_fasta_*pro*homo* > ../All.CARD.NA.fa
 cat protein_fasta_* > ../All.CARD.AA.fa
 mkdir blastNA blastAA
