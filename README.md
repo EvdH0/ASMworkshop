@@ -163,7 +163,7 @@ wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.6.0
 
 ## check the signature if it is work
 md5sum --check ncbi-blast-2.6.0+-x64-linux.tar.gz.md5
-## you should see "ncbi-blast-2.6.0+-src.tar.gz: OK"
+## you should see "ncbi-blast-2.6.0+-linux.tar.gz: OK"
 
 ## extract data
 tar -xvf ncbi-blast-2.6.0+-x64-linux.tar.gz
