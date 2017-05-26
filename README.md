@@ -445,7 +445,7 @@ BEGIN {print "Gene\tNumberOfORFsObserved"; sum=0;}
  END {print "Total\t"sum}'
 
  ```
-## Install and running pFAM
+## Install and running PFAM
 
 ```shell
 ## get the PFAM necessary files
