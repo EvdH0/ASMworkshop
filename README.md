@@ -130,8 +130,11 @@ ls
 ## to see options available just write this 
 cd ~/Data
 
-## put the orginal file on the web.
+
+## we need git to get the data from the workshop
 sudo yum install git 
+
+## get the data from the workshop
 git clone https://github.com/EvdH0/ASMworkshop
 
 cp ASMworkshop/data/sample.fasta .
@@ -197,8 +200,6 @@ tar -xvf ncbi-blast-2.6.0+-x64-linux.tar.gz
 ## check if blast work
 ~/Programs/ncbi-blast-2.6.0+/bin/blastn -h
 
-## Now, we remove temporary file
-rm ncbi-blast-2.6.0+-x64-linux.tar.gz*
 ```
 ### Install Hmmer
 ```shell
@@ -208,8 +209,9 @@ rm ncbi-blast-2.6.0+-x64-linux.tar.gz*
 cd ~/Programs
 
 ## download the the bineary version of hmmer## remove temporary files
-wget http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz*
+wget http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz
 
+## To extract data from the archive
 tar -xvf hmmer-3.1b2-linux-intel-x86_64.tar.gz 
 
 
@@ -219,8 +221,6 @@ chmod +x hmmer-3.1b2-linux-intel-x86_64/binaries/*
 
 ~/Programs/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmscan -h 
 
-## remove temporary files
-rm hmmer-3.1b2-linux-intel-x86_64.tar.gz*
 ```
 
 
@@ -239,7 +239,9 @@ cd resfinder_db
 
 
 ## make sure all files have a linux format
-##sudo yum install dos2unix
+## todo that you need to install dos2unix
+sudo yum install dos2unix
+
 ls *fsa | while read file; do dos2unix $file; done 
 
 
@@ -252,7 +254,7 @@ cat $file |    ## print the whole file
 awk -F"\t" '{print } END {print "\n"}';  ## add newline at the end of each file 
 done  > ../All.resfinder.fsa ## save all these files on the file ../All.resfinder.fsa.
 
-## OPTIONAL
+
 ## to get map the Antibiotic resistance gene to a gene class
 ls *fsa | while read file ; do  ## loop through all fasta files
 f=$(echo "$file" | cut -f1 -d.);  ## get the class name from the file name.
@@ -261,9 +263,8 @@ grep ">" $file |  # extract headers of the fasta files
 sed 's/>//g' | awk -F"\t" -v class="$f" '{print $1"\t"class}'; done | ## pick the first to be gene name and map it to class name
 awk -F"\t" 'BEGIN {print "Gene\tClass"} {print $1"\t"$2 }'  > ../Resfinder.gene.class
 
+
 cd ..
-
-
 mkdir blastNA  
 cd blastNA
 
@@ -286,9 +287,16 @@ cd Resfinder
 time ~/Programs/ncbi-blast-2.6.0+/bin/blastn -query ../orfs.nucleotide.fa \
 -db ~/Databases/Resfinder/blastNA/RESFINDERNucl -outfmt 6 \
 -max_target_seqs 1 -evalue 1E-50 -word_size 6 -num_threads 1 -out orf.resfinder.NA.versus.NA.tab 
+
+## to see the result of the blast
+ 
+cat orf.resfinder.NA.versus.NA.tab 
+
 ```
 
- ### Next?
+### See what antibiotic resistance genes maps to 
+ 
+ 
 ```shell
 ## fruther annotation
 ## maping gene to class
@@ -296,6 +304,8 @@ time ~/Programs/ncbi-blast-2.6.0+/bin/blastn -query ../orfs.nucleotide.fa \
 ## 
 join -t $'\t' -1 2 -2 1 <(sort -k2 orf.resfinder.NA.versus.NA.tab ) \
 <(sort ~/Databases/Resfinder/Resfinder.gene.class) > orf.resfinder.NA.versus.NA.tab.geneClass
+
+cat orf.resfinder.NA.versus.NA.tab.geneClass
 ## how many gene classes are there?
 ## how many betalactamases are there?
 ## how many inserts have resistance gene?
