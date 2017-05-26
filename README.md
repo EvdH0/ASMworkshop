@@ -62,9 +62,9 @@ You can download it from this website https://www.chiark.greenend.org.uk/~sgtath
  and generate a private key and save it at c:/ASMWorkshop.ppk
  
  Run puTTy on 
-      Session category: 
  
-            Host Name: ec2-user@ec2-34-223-205-112.us-west-2.compute.amazonaws.com
+      Session: 
+             Host Name: ec2-user@ec2-34-223-205-112.us-west-2.compute.amazonaws.com
             
       Connection:
             SSH
@@ -131,7 +131,7 @@ ls
 cd ~/Data
 
 ## put the orginal file on the web.
-
+sudo yum install git 
 git clone https://github.com/EvdH0/ASMworkshop
 
 cp ASMworkshop/data/sample.fasta .
