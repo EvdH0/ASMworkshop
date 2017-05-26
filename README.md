@@ -256,6 +256,10 @@ grep ">" $file |  # extract headers of the fasta files
 sed 's/>//g' | awk -F"\t" -v class="$f" '{print $1"\t"class}'; done | ## pick the first to be gene name and map it to class name
 awk -F"\t" 'BEGIN {print "Gene\tClass"} {print $1"\t"$2 }'  > ../Resfinder.gene.class
 
+## to check if you have the right file format
+## two column 
+## ARGGene     class
+head ../Resfinder.gene.class
 
 cd ..
 mkdir blastNA  
