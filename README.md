@@ -62,7 +62,7 @@ You can download it from this website https://www.chiark.greenend.org.uk/~sgtath
  and generate a private key and save it at c:/ASMWorkshop.ppk
  
  >> make login: ASM2017
- 
+ >> Type of the key to generate :: choose SSH-1 (RSA)
  
  Run puTTy on 
  
