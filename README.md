@@ -56,11 +56,15 @@ We can use megablast to map the nt ORFs to plasmid database.
 
 ## 2. Prepare your directories
 ```shell
-mkdir ASM cd ASM mkdir Databases Programs Data Scripts
-ls
-echo "export ASM=$(pwd)" >> ~/.bashrc source ~/.bashrc
-tail -n 1 ~/.bashrc
-ls $ASM
+## create at your home directory the following three folders
+## one called Data to have the data and result  you are getting from the annotation
+mkdir Data
+
+## to have the annotation database
+mkdir Databases  
+
+## to have the programs we need to run. 
+mkdir Programs 
 ```
 
 
@@ -71,14 +75,13 @@ ls $ASM
 - Download both the program and the key
 
 ```shell
-cd $ASM/Programs
-mkdir GenMarkS
-cd GenMarkS
+cd ~/Programs
+
 ## copy link address of the download program here
 ## and wget it 
-wget http://topaz.gatech.edu/GeneMark/tmp/GMtool_ZH3mh/gm_key_64.gz
+wget http://topaz.gatech.edu/GeneMark/tmp/GMtool_guX8y/genemark_suite_linux_64.tar.gz
 ## copy link address of the key using 64_bit version
-wget http://topaz.gatech.edu/GeneMark/tmp/GMtool_ZH3mh/genemark_suite_linux_64.tar.gz
+wget http://topaz.gatech.edu/GeneMark/tmp/GMtool_guX8y/gm_key_64.gz
 
 ## extract both the program and the key. 
 tar -xvf genemark_suite_linux_64.tar.gz 
@@ -91,34 +94,25 @@ cp gm_key_64 ~/.gm_key
 ## 
 
 cd genemark_suite_linux_64/gmsuite
-ls 
-## you should observe the 
+ls
 
-## In the scope of this work shop we will use this command gmhmmp mainly.
-
-## Create an Alias to simplify the job
-
-echo "export gmsuite=$(pwd)" >> ~/.bashrc
-echo "alias getORFUsingGeneMarks=$(pwd)/gmhmmp" >> ~/.bashrc
-
-## to see whether the alias is there or not. 
-##tail -n 5 ~/.bashrc
-
-## to make the effect run. 
-source ~/.bashrc
 ```
 
 ### Running genemark
 ```shell
+
 ## to see options available just write this 
-cd $ASM/Data
+cd ~/Data
 
 ## put the orginal file on the web.
 
-wget $address
+git clone https://github.com/EvdH0/ASMworkshop
 
-getORFUsingGeneMarks -m $gmsuite/MetaGeneMark_v1.mod \
--A orfs.protein.fa -D orfs.nucleotide.fa -o all.orfs.result gud_np.fa
+cp ASMworkshop/data/sample.fasta .
+
+gmsuite=~/Programs/genemark_suite_linux_64/gmsuite
+$gmsuite/gmhmmp -m $gmsuite/MetaGeneMark_v1.mod \
+-A orfs.protein.fa -D orfs.nucleotide.fa -o all.orfs.result sample.fasta
 
 cat orfs.nucleotide.fa 
 cat orfs.protein.fa 
@@ -152,144 +146,134 @@ awk -F"\t" ' BEGIN {print "ORFID\tGENMarksORFID\tDescription\tsequence"}
 {if(FNR>1) print "ORFID"FNR-1"\t"$0}' > orfs.protein.tab
 ```
 
+### Install the BLAST tool
+To download blast visit page https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
+
+```shell
+cd ~/Programs
+
+## if wget is not available, get it using the command below
+## sudo yum install wget
+
+## download latest version of blast
+wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.6.0+-x64-linux.tar.gz
+## download md5 signature to confirm that you download the blast completely and nothing is missing
+wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.6.0+-x64-linux.tar.gz.md5
+
+
+## check the signature if it is work
+md5sum --check ncbi-blast-2.6.0+-x64-linux.tar.gz.md5
+## you should see "ncbi-blast-2.6.0+-src.tar.gz: OK"
+
+## extract data
+tar -xvf ncbi-blast-2.6.0+-x64-linux.tar.gz
+
+## check if blast work
+~/Programs/ncbi-blast-2.6.0+/bin/blastn -h
+
+## Now, we remove temporary file
+rm ncbi-blast-2.6.0+-x64-linux.tar.gz*
+```
+### Install Hmmer
+```shell
+
+## installing hiddern Markov Model searcher.
+
+cd ~/Programs
+
+## download the the bineary version of hmmer## remove temporary files
+wget http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz*
+
+tar -xvf hmmer-3.1b2-linux-intel-x86_64.tar.gz 
+
+
+##make all commands executable
+chmod +x hmmer-3.1b2-linux-intel-x86_64/binaries/*
+
+
+~/Programs/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmscan -h 
+
+## remove temporary files
+rm hmmer-3.1b2-linux-intel-x86_64.tar.gz*
+```
+
+
 
 ## 4. The first database, Resfinder
 
 ### Installation of Resfinder
 ```shell
 ## to download the most updated version of resfinder
-mkdir $ASM/Databases/Resfinder
-cd $ASM/Databases/Resfinder
+rm -rf ~/Databases/Resfinder 
+mkdir ~/Databases/Resfinder
+cd ~/Databases/Resfinder
+## sudo yum install git
 git clone https://bitbucket.org/genomicepidemiology/resfinder_db.git
 cd resfinder_db
 
 
 ## make sure all files have a linux format
-
+##sudo yum install dos2unix
 ls *fsa | while read file; do dos2unix $file; done 
 
 
 ## compile them all in one file.
 
-cat *.fsa > ../All.resfinder.fsa
 
-
-
-##ls *fsa | while read file; do cat $file | awk -F"\t" '{print } END {print "\n"}'; done  > ../All.resfinder.fsa
+ls *fsa |  ## show all fasta file
+while read file; do  ## loop through them one by one. 
+cat $file |    ## print the whole file
+awk -F"\t" '{print } END {print "\n"}';  ## add newline at the end of each file 
+done  > ../All.resfinder.fsa ## save all these files on the file ../All.resfinder.fsa.
 
 ## OPTIONAL
- ls *fsa | while read file ; do f=$(echo "$file" | cut -f1 -d.); grep ">" $file | 
- sed 's/>//g' | awk -F"\t" -v class="$f" '{print $1"\t"class}'; done | 
- awk -F"\t" 'BEGIN {print "Gene\tClass"} {print $1"\t"$2 }'  > ../Resfinder.gene.class
+## to get map the Antibiotic resistance gene to a gene class
+ls *fsa | while read file ; do  ## loop through all fasta files
+f=$(echo "$file" | cut -f1 -d.);  ## get the class name from the file name.
+## extract gene names from the fasta file
+grep ">" $file |  # extract headers of the fasta files
+sed 's/>//g' | awk -F"\t" -v class="$f" '{print $1"\t"class}'; done | ## pick the first to be gene name and map it to class name
+awk -F"\t" 'BEGIN {print "Gene\tClass"} {print $1"\t"$2 }'  > ../Resfinder.gene.class
 
 cd ..
 
 
-## OPTIONAL
-## translate the NA resfinder to protein
-$EmbossFolder/transeq -sequence All.resfinder.fsa -outseq All.resfinder.AA.fa -frame 1
-
-head All.resfinder.prot.fa
-sed 's/_[1-6]$//g' All.resfinder.AA.fa  | head 
-
-sed 's/_[1-6]$//g' All.resfinder.AA.fa -i
-
-mkdir blastNA  ## blastAA
-
-## OPTIONAL
-## compiling blast Protein database for Resfinder
-cd blastAA
-$blastExecFolder/makeblastdb -in ../All.resfinder.AA.fa -title RESFINDERProt \
--out RESFINDERProt -input_type fasta   -hash_index -dbtype prot
-
-echo "export RESFINDERProt=$(pwd)/RESFINDERProt" >> ~/.bashrc
-tail -n 1 ~/.bashrc
-source ~/.bashrc
-
-cd ..
-## compiling blast Nucleotides database for Resfinder
-
-
-## install binary blast 
-
+mkdir blastNA  
 cd blastNA
 
-$blastExecFolder/makeblastdb -in ../All.resfinder.fsa -title RESFINDERNucl \
+~/Programs/ncbi-blast-2.6.0+/bin/makeblastdb -in ../All.resfinder.fsa -title RESFINDERNucl \
 -out RESFINDERNucl -input_type fasta   -hash_index -dbtype nucl
 
-## REMOVE IT
-echo "export RESFINDERNucl=$(pwd)/RESFINDERNucl" >> ~/.bashrc
-tail -n 1 ~/.bashrc
-source ~/.bashrc
+
 ```
 
-### Install the BLAST tool
-To download blast visit page https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 
-```shell
-cd $ASM/Programs
-mkdir blast
-cd blast
-
-
-## download latest version of blast
-wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/ncbi-blast-2.6.0+-src.tar.gz
-## download md5 signature to confirm that you download the blast completely and nothing is missing
-wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/ncbi-blast-2.6.0+-src.tar.gz.md5
-
-
-## check the signature if it is work
-md5sum --check ncbi-blast-2.6.0+-src.tar.gz.md5 
-## you should see "ncbi-blast-2.6.0+-src.tar.gz: OK"
-```
-
-```shell
-cd  ncbi-blast-2.6.0+-src/c++
-./configure --prefix=$(pwd)
-time make
-time make install
-```
 ### Run Resfinder
 ```shell
-cd $ASM/Data
+
+cd ~/Data
 mkdir Resfinder
 cd Resfinder
 ## nucleotide versus Resfinder nucleotide
 
-## replace  RESFINDERNucl with right path.
-time $blastExecFolder/blastn -query ../orfs.nucleotide.fa -db $RESFINDERNucl -outfmt 6 \
- -max_target_seqs 1 -evalue 1E-50 -word_size 6 -num_threads 1 -out orf.resfinder.NA.versus.NA.tab 
- 
- 
-## protein versus Resfinder nucleotide
-$blastExecFolder/tblastn -query ../orfs.protein.fa -db $RESFINDERNucl -outfmt 6 \
- -max_target_seqs 10 -evalue 1E-50 -word_size 3 -num_threads 28 -out orf.resfinder.AA.versus.NA.tab 
- 
-## protein versus Resfinder nucleotide
-$blastExecFolder/tblastx -query ../orfs.nucleotide.fa -db $RESFINDERNucl -outfmt 6 \
- -max_target_seqs 10 -evalue 1E-50 -word_size 3 -num_threads 28 -out orf.resfinder.trans.NA.versus.NA.tab 
- 
-## protein versus Resfinder protein
-$blastExecFolder/blastp -query  ../orfs.protein.fa -db $RESFINDERProt -outfmt 6 \
- -max_target_seqs 10 -evalue 1E-50 -word_size 6 -num_threads 28  -out orf.resfinder.AA.versus.AA.tab 
- 
-## nucleotide versus Resfinder protein
-$blastExecFolder/blastx -query ../orfs.nucleotide.fa -db $RESFINDERProt -outfmt 6 \
- -max_target_seqs 10 -evalue 1E-50 -word_size 6 -num_threads 28  -out orf.resfinder.NA.versus.AA.tab
- ```
- 
+## blast orfs against the Resfinder nucleotide blastdb
+time ~/Programs/ncbi-blast-2.6.0+/bin/blastn -query ../orfs.nucleotide.fa \
+-db ~/Databases/Resfinder/blastNA/RESFINDERNucl -outfmt 6 \
+-max_target_seqs 1 -evalue 1E-50 -word_size 6 -num_threads 1 -out orf.resfinder.NA.versus.NA.tab 
+```
+
  ### Next?
 ```shell
- ## fruther annotation
+## fruther annotation
 ## maping gene to class
 
 ## 
-Resfinder.gene.class 
-JoinTwoFilesBasedOnKeys.sh 2 1 $ASM/Databases/Resfinder/Resfinder.gene.class orf.resfinder.NA.versus.NA.tab 
-
+join -t $'\t' -1 2 -2 1 <(sort -k2 orf.resfinder.NA.versus.NA.tab ) \
+<(sort ~/Databases/Resfinder/Resfinder.gene.class) > orf.resfinder.NA.versus.NA.tab.geneClass
 ## how many gene classes are there?
 ## how many betalactamases are there?
 ## how many inserts have resistance gene?
+ 
 ```
 
 
@@ -298,7 +282,7 @@ JoinTwoFilesBasedOnKeys.sh 2 1 $ASM/Databases/Resfinder/Resfinder.gene.class orf
 ### Install the CARD database
 ```shell
 # getting and installing
-cd $ASM/Databases
+cd ~/Databases
 mkdir CARD
 cd CARD
 
@@ -307,7 +291,15 @@ cd RawData
 
 wget https://card.mcmaster.ca/download/0/broadstreet-v1.1.8.tar.gz
 
-tar -xvf broadstreet-v1.1.8.tar.gz
+ls 
+
+## maybe 
+##sudo yum install bzip2
+
+tar -xvf broadstreet-v1.1.8.tar.gz 
+
+ls 
+
 ```
 
 ```shell
@@ -319,54 +311,145 @@ mkdir blastNA blastAA
 ## compiling blast protein database for CARD
 cd blastAA
 
-$blastExecFolder/makeblastdb -in ../All.CARD.AA.fa -title CARDProt \
--out CARDProt -input_type fasta   -hash_index -dbtype prot
+## to show the card nucleotide fasta files
+ls nucleotide_fasta_*
 
-echo "export CARDProt=$(pwd)/CARDProt" >> ~/.bashrc
-tail -n 1 ~/.bashrc
-source ~/.bashrc
+cat nucleotide_fasta_* > ../All.CARD.NA.fa
+
+ls protein_fasta_*
+cat protein_fasta_* > ../All.CARD.AA.fa
+
+cd ..
+mkdir blastNA blastAA
+
+
+## compiling blast protein database for CARD
+cd blastAA
+
+~/Programs/ncbi-blast-2.6.0+/bin/makeblastdb -in ../All.CARD.AA.fa -title CARDProt \
+-out CARDProt -input_type fasta   -hash_index -dbtype prot
 
 cd ..
 
 ## compiling blast Nucleotides database for CARD
 cd blastNA
-
-$blastExecFolder/makeblastdb -in ../All.CARD.NA.fa -title CARDNucl \
+~/Programs/ncbi-blast-2.6.0+/bin/makeblastdb -in ../All.CARD.NA.fa -title CARDNucl \
 -out CARDNucl -input_type fasta   -hash_index -dbtype nucl
 
-echo "export CARDNucl=$(pwd)/CARDNucl" >> ~/.bashrc
-tail -n 1 ~/.bashrc
-source ~/.bashrc
 ```
 
 ### Run the CARD database
 ```shell
 ## Run CARD databses
 
-cd $ASM/Data
+cd ~/Data
 mkdir CARD
 cd CARD
 ## nucleotide versus card nucleotide
-$blastExecFolder/blastn -query ../orfs.nucleotide.fa -db $CARDNuc -outfmt 6 \
+
+
+~/Programs/ncbi-blast-2.6.0+/bin/blastn -query ../orfs.nucleotide.fa -db ~/Databases/CARD/blastNA/CARDNucl -outfmt 6 \
  -max_target_seqs 10 -evalue 1E-50 -word_size 6 -num_threads 28 -out orf.card.NA.versus.NA.tab 
- 
+
+
+## to get the top hit based on bitscore.
+
+sort -k1,1 -k12,12nr orf.card.NA.versus.NA.tab  | 
+awk -F"\t" '{if(FNR==1) {geneID=$1; print $0} else 
+{if(geneID!=$1) {geneID=$1; print $0}}}' >  orf.card.NA.versus.NA.tab.top1.txt
+
+
+wc -l  orf.card.NA.versus.NA.tab.top1.txt
+## to show the frequency of Antibiotic resistance genes observed.
+cut -f1,2 orf.card.NA.versus.NA.tab.top1.txt  |  sort -u  | cut -f2 |  sort | 
+uniq -c |  
+awk '
+BEGIN {print "Gene\tNumberOfORFsObserved"; sum=0;} 
+{print $2"\t"$1; sum=sum+$1} 
+END {print "Total\t"sum}' 
+
  
 ## protein versus card nucleotide
-$blastExecFolder/tblastn -query ../orfs.protein.fa -db $CARDNuc -outfmt 6 \
- -max_target_seqs 10 -evalue 1E-50 -word_size 6 -num_threads 28 -out orf.card.AA.versus.NA.tab 
+~/Programs/ncbi-blast-2.6.0+/bin/tblastn -query ../orfs.protein.fa -db ~/Databases/CARD/blastNA/CARDNucl -outfmt 6 \
+ -max_target_seqs 10 -evalue 1E-50 -word_size 4 -num_threads 28 -out orf.card.AA.versus.NA.tab 
  
  
-## protein versus card protein
-$blastExecFolder/blastp -query ../orfs.protein.fa -db $CARDProt -outfmt 6 \
- -max_target_seqs 10 -evalue 1E-50 -word_size 6 -num_threads 28  -out orf.card.AA.versus.AA.tab 
  
-## nucleotide versus card protein
-## translaste sequence
-## $Emboss/transeq -in  ../orfs.nucleotide.fa -frame [1,6] ../orfs.protein.t1.fa
+sort -k1,1 -k12,12nr orf.card.AA.versus.NA.tab  | 
+awk -F"\t" '{if(FNR==1) {geneID=$1; print $0} 
+else {if(geneID!=$1) {geneID=$1; print $0}}}' >  orf.card.AA.versus.NA.tab.txt.top1.txt
 
-$blastExecFolder/blastp -query  ../orfs.protein.t1.fa -db $CARDProt -outfmt 6 \
- -max_target_seqs 10 -evalue 1E-50 -word_size 6 -num_threads 28  -out orf.card.AA.versus.AA.tab
+## to show the frequency of Antibiotic resistance genes observed.
+
+wc -l   orf.card.AA.versus.NA.tab.txt.top1.txt
+## to show the frequency of Antibiotic resistance genes observed.
+cut -f1,2  orf.card.AA.versus.NA.tab.txt.top1.txt |  sort -u  | cut -f2 |  sort | 
+uniq -c |  
+awk '
+BEGIN {print "Gene\tNumberOfORFsObserved"; sum=0;} 
+{print $2"\t"$1; sum=sum+$1} 
+END {print "Total\t"sum}' 
+ 
+
+## protein versus card protein
+~/Programs/ncbi-blast-2.6.0+/bin/blastp -query ../orfs.protein.fa -db ~/Databases/CARD/blastAA/CARDProt -outfmt 6 \
+ -max_target_seqs 10 -evalue 100 -word_size 4 -num_threads 28  -out orf.card.AA.versus.AA.tab 
+ 
+ 
+ 
+sort -k1,1 -k12,12nr orf.card.AA.versus.AA.tab   | 
+awk -F"\t" '{if(FNR==1) {geneID=$1; print $0} else 
+{if(geneID!=$1) {geneID=$1; print $0}}}' >  orf.card.AA.versus.AA.tab.top1.txt
+
+## to show the number of Antibiotic resistance genes observed.
+wc -l   orf.card.AA.versus.AA.tab.top1.txt
+
+
+## to show the frequency of Antibiotic resistance genes observed.
+cut -f1,2 orf.card.AA.versus.AA.tab.top1.txt |  sort -u  | cut -f2 |  sort | 
+uniq -c |  
+awk '
+BEGIN {print "Gene\tNumberOfORFsObserved"; sum=0;} 
+{print $2"\t"$1; sum=sum+$1} 
+ END {print "Total\t"sum}'
+
  ```
+## Install and running pFAM
+
+```shell
+## get the PFAM necessary files
+## compile databases
+## query databases
+## list domains
+
+
+## Download the pfam from the ftp servcer ftp://ftp.ebi.ac.uk/pub/databases/Pfam/releases/ choose the most recent one. 
+## for now we are using Pfam31
+
+mkdir ~/Databases/PFAM
+cd ~/Databases/PFAM
+
+
+## download pfam hmm database
+wget ftp://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam31.0/Pfam-A.hmm.gz
+
+## get 
+time gzip -d Pfam-A.hmm.gz
+
+
+## compile database
+time ~/Programs/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmpress Pfam-A.hmm
+
+mkdir ~/Data/PFAM
+cd ~/Data/PFAM
+
+
+## identify pfam domains of the orfs
+## needed protein sequences of the orfs
+time ~/Programs/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmscan --cpu 1 --notextw --noali --tblout \
+PFAM.result ~/Databases/PFAM/Pfam-A.hmm ../orfs.protein.fa
+
+```
 
 ## Combine data
 TBD
