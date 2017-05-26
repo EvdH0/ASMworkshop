@@ -480,6 +480,8 @@ cd ~/Data/PFAM
 time ~/Programs/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmscan --cpu 1 --notextw --noali --tblout \
 PFAM.result ~/Databases/PFAM/Pfam-A.hmm ../orfs.protein.fa
 
+cat PFAM.result
+
 ```
 
 ## Combine data
