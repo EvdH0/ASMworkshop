@@ -63,7 +63,9 @@ You can download it from this website https://www.chiark.greenend.org.uk/~sgtath
  
  fill the following
  >> Key passphrase: ASM2017
+ 
  >> Confirm passphrase: ASM2017
+ 
  >> Type of the key to generate :: choose SSH-1 (RSA)
  
  #Run puTTy on 
