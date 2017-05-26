@@ -53,6 +53,27 @@ We can use megablast to map the nt ORFs to plasmid database.
 # Workshop
 
 ## 1. Login in to the Amazon cloud
+### for windows users you need t o install putty. 
+You can download it from this website https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html.
+ install this "putty-64bit-0.69-installer.msi" on your machine. 
+ 
+ run puTTYgen. 
+ load the cloud machine private key "ASMWorkshopKey.pem" that will be announced here later. 
+ and generate a private key and save it at c:/ASMWorkshop.ppk
+ 
+ Run puTTy on 
+      Session category: 
+ 
+            Host Name: ec2-user@ec2-34-223-205-112.us-west-2.compute.amazonaws.com
+            
+      Connection:
+            SSH
+               Auth
+                  Private key file for authentication: c:/ASMWorkshop.ppk
+ 
+ 
+ 
+
 
 ## 2. Prepare your directories
 ```shell
@@ -77,11 +98,16 @@ mkdir Programs
 ```shell
 cd ~/Programs
 
+
+
+## we need to install wget to get the data from the web.
+sudo yum install wget
+
 ## copy link address of the download program here
 ## and wget it 
-wget http://topaz.gatech.edu/GeneMark/tmp/GMtool_guX8y/genemark_suite_linux_64.tar.gz
+wget <the link from the website after  accepting the license >  ##http://topaz.gatech.edu/GeneMark/tmp/GMtool_guX8y/genemark_suite_linux_64.tar.gz
 ## copy link address of the key using 64_bit version
-wget http://topaz.gatech.edu/GeneMark/tmp/GMtool_guX8y/gm_key_64.gz
+wget <the link from the website after  accepting the license >  ##http://topaz.gatech.edu/GeneMark/tmp/GMtool_guX8y/gm_key_64.gz
 
 ## extract both the program and the key. 
 tar -xvf genemark_suite_linux_64.tar.gz 
