@@ -336,16 +336,6 @@ tar -xvf broadstreet-v1.1.8.tar.gz
 
 ls 
 
-```
-
-```shell
-## to insure that you are at the right place.
-cd ~/Databases/CARD/
-cat nucleotide_fasta_*pro*homo* > ../All.CARD.NA.fa
-cat protein_fasta_* > ../All.CARD.AA.fa
-mkdir blastNA blastAA
-
-
 ## compiling blast protein database for CARD
 cd blastAA
 
@@ -357,6 +347,18 @@ cat nucleotide_fasta_* > ../All.CARD.NA.fa
 ls protein_fasta_*
 cat protein_fasta_* > ../All.CARD.AA.fa
 
+```
+
+## Compile CARD Databases
+```shell
+## to insure that you are at the right place.
+cd ~/Databases/CARD/
+
+mkdir blastNA blastAA
+
+
+
+
 cd ..
 mkdir blastNA blastAA
 
@@ -367,6 +369,7 @@ cd blastAA
 ~/Programs/ncbi-blast-2.6.0+/bin/makeblastdb -in ../All.CARD.AA.fa -title CARDProt \
 -out CARDProt -input_type fasta   -hash_index -dbtype prot
 
+## to confirm that you are at  ~/Databases/CARD/
 cd ..
 
 ## compiling blast Nucleotides database for CARD
