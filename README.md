@@ -173,7 +173,7 @@ grep ">"  orfs.nucleotide.fa | wc -l
 
 
 ```
-
+## 4. Install BLAST and HMMer
 ### Install the BLAST tool
 To download BLAST at your own system visit [this](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download) page. We already selected the right version in the code below.
 
@@ -226,7 +226,7 @@ chmod +x hmmer-3.1b2-linux-intel-x86_64/binaries/*
 
 
 
-## 4. The first database, Resfinder
+## 5. The first database, Resfinder
 
 ### Installation of Resfinder
 ```shell
@@ -318,7 +318,7 @@ cat orf.resfinder.NA.versus.NA.tab.geneClass
 ```
 
 
-## 5. CARD
+## 6. CARD
 
 ### Install the CARD database
 ```shell
@@ -449,6 +449,7 @@ BEGIN {print "Gene\tNumberOfORFsObserved"; sum=0;}
  END {print "Total\t"sum}'
 
  ```
+## 7. Protein domains using PFAM
 ## Install and running PFAM
 
 ```shell
