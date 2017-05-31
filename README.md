@@ -404,7 +404,7 @@ END {print "Total\t"sum}'
  
 ## protein versus card nucleotide
 ~/Programs/ncbi-blast-2.6.0+/bin/tblastn -query ../orfs.protein.fa -db ~/Databases/CARD/blastNA/CARDNucl -outfmt 6 \
- -max_target_seqs 10 -evalue 1E-50 -word_size 4 -num_threads 28 -out orf.card.AA.versus.NA.tab 
+ -max_target_seqs 10 -evalue 1E-50 -word_size 4 -num_threads 1 -out orf.card.AA.versus.NA.tab 
  
  
  
@@ -426,7 +426,7 @@ END {print "Total\t"sum}'
 
 ## protein versus card protein
 ~/Programs/ncbi-blast-2.6.0+/bin/blastp -query ../orfs.protein.fa -db ~/Databases/CARD/blastAA/CARDProt -outfmt 6 \
- -max_target_seqs 10 -evalue 100 -word_size 4 -num_threads 28  -out orf.card.AA.versus.AA.tab 
+ -max_target_seqs 10 -evalue 100 -word_size 4 -num_threads 1  -out orf.card.AA.versus.AA.tab 
  
  
  
