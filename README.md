@@ -102,7 +102,9 @@ mkdir Programs
 ### Installation of Genemark
 - Go to http://exon.gatech.edu/Genemark/ and search for programs and click on the link it will take you to http://exon.gatech.edu/Genemark/license_download.cgi 
 - Select GeneMarkS v.4.30 and LINUX 64 and fill the form then click on the button "I agree to the terms of this license agreement" 
+![Select GeneMarkS v.4.30 and LINUX 64](img/selectGeneMark.png)
 - Download both the program and the key
+![Download program AND key](img/downloadGeneMark.png)
 
 ```shell
 cd ~/Programs
