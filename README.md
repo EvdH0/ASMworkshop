@@ -382,7 +382,7 @@ cd CARD
 
 
 ~/Programs/ncbi-blast-2.6.0+/bin/blastn -query ../orfs.nucleotide.fa -db ~/Databases/CARD/blastNA/CARDNucl -outfmt 6 \
- -max_target_seqs 10 -evalue 1E-50 -word_size 6 -num_threads 28 -out orf.card.NA.versus.NA.tab 
+ -max_target_seqs 10 -evalue 1E-50 -word_size 6 -num_threads 1 -out orf.card.NA.versus.NA.tab 
 
 
 ## to get the top hit based on bitscore.
