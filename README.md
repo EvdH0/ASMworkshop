@@ -44,10 +44,13 @@ If there is time left, annotate ORFs against optimal databases using plasmid dat
 We can use megablast to map the nt ORFs to plasmid database.
 # Content
 - [1. Login on amazon cloud](#foo)
-- [2. Prepare directories](#foo)
-- [2. Genemark](#foo)
-- [3. Resfinder](#foo)
-- [4. CARD](#card)
+- [2. Prepare your directories](#foo)
+- [3. Finding Open Reading Frames (ORFs)](#foo)
+- [4. Install BLAST and HMMer](#foo)
+- [5. The first database, Resfinder](#card)
+- [6. CARD](#card)
+- [7. Protein domains using PFAM](#pfam)
+
 
 
 # Workshop
