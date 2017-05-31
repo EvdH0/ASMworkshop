@@ -112,7 +112,7 @@ cd ~/Programs
 
 
 ## we need to install wget to get the data from the web.
-sudo yum install wget
+## sudo yum install wget
 
 ## copy link address of the download program here
 ## and wget it 
@@ -143,7 +143,7 @@ cd ~/Data
 
 
 ## we need git to get the data from the workshop
-sudo yum install git 
+# sudo yum install git 
 
 ## get the data from the workshop
 git clone https://github.com/EvdH0/ASMworkshop
@@ -175,7 +175,7 @@ grep ">"  orfs.nucleotide.fa | wc -l
 ```
 
 ### Install the BLAST tool
-To download blast visit page https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
+To download BLAST at your own system visit [this](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download) page. We already selected the right version in the code below.
 
 ```shell
 cd ~/Programs
@@ -198,6 +198,8 @@ tar -xvf ncbi-blast-2.6.0+-x64-linux.tar.gz
 
 ## check if blast work
 ~/Programs/ncbi-blast-2.6.0+/bin/blastn -h
+
+## you now see a brief list with commands that can be used with blast
 
 ```
 ### Install Hmmer
@@ -239,7 +241,7 @@ cd resfinder_db
 
 ## make sure all files have a linux format
 ## todo that you need to install dos2unix
-sudo yum install dos2unix
+## sudo yum install dos2unix
 
 ls *fsa | while read file; do dos2unix $file; done 
 
@@ -486,5 +488,3 @@ cat PFAM.result
 
 ```
 
-## Combine data
-TBD
