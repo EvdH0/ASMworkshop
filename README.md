@@ -56,43 +56,40 @@ We can use megablast to map the nt ORFs to plasmid database.
 # Workshop
 
 ## 1. Login in to the Amazon cloud
-### for windows users you need t o install putty. 
+### for windows users you need to install PuTTy. 
 You can download it from this website https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html.
  install this "putty-64bit-0.69-installer.msi" on your machine. 
  
- #Run puTTYgen. 
- load the cloud machine private key "ASMWorkshopKey.pem" that will be announced here later. 
- and generate a private key and save it at c:/ASMWorkshop.ppk
  
- fill the following
- >> Key passphrase: ASM2017
  
- >> Confirm passphrase: ASM2017
- 
- >> Type of the key to generate :: choose SSH-1 (RSA)
- 
- #Run puTTy on 
+ #Run PuTTy on your computer
+ You will see a screen like this
+ ![Putty config screen](img/putty.png)
  
       Session: 
-             Host Name: ec2-user@ec2-34-223-205-112.us-west-2.compute.amazonaws.com
+             Host Name: 34.207.202.240
             
-      Connection:
-            SSH
-               Auth
-                  Private key file for authentication: c:/ASMWorkshop.ppk
+ A pop-up will appear like this, click on Yes
+  ![Putty popup](img/puttyalert.png)
  
+ Fill in the username-that-will-be-handed-out and password
+ Note that linux does not show any change while typing of password. 
+ You should see a screen like this:
+   ![Putty done](img/puttydone.png)
+
+##For Linux/MacOSx
+Open up the terminal
+ ![Terminal mac](img/terminal.png)
  
- >> when the puTTy run you should type  ASM2017 
- >> Note that linux does not show any change while typing of password. so it is your responsibility to remember to put 
- >> ASM2017 right and in order.
-
-##For Linux
-
+ Run the following command to connect to the server
 ```shell
-chmod 600 ~/Downloads/ASMWorkshopKey.pem
-ssh -i ~/Downloads/ASMworkshop.pem ubuntu@34.207.202.240
+
+ssh  usernameThatWillBeHandledout@34.207.202.240
 
 ```
+
+You should see something like this
+ ![Terminal mac](img/maclogin.png)
 ## 2. Prepare your directories
 ```shell
 ## create at your home directory the following three folders
