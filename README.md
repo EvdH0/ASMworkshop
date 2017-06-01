@@ -62,7 +62,7 @@ You can download it from this website https://www.chiark.greenend.org.uk/~sgtath
  
  
  
- #Run PuTTy on your computer
+ # Run PuTTy on your computer
  You will see a screen like this
  ![Putty config screen](img/putty.png)
  
@@ -77,7 +77,7 @@ You can download it from this website https://www.chiark.greenend.org.uk/~sgtath
  You should see a screen like this:
    ![Putty done](img/puttydone.png)
 
-##For Linux/MacOSx
+# For Linux/MacOSx
 Open up the terminal
  ![Terminal mac](img/terminal.png)
  
