@@ -90,6 +90,8 @@ ssh  usernameThatWillBeHandledout@34.207.202.240
 
 You should see something like this
  ![Terminal mac](img/maclogin.png)
+ 
+The introduction slides from Mostafa can be found [here](https://github.com/EvdH0/ASMworkshop/tree/master/slides) in in pdf format 
 ## 2. Prepare your directories
 ```shell
 ## create at your home directory the following three folders
