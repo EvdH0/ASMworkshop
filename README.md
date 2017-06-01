@@ -56,13 +56,13 @@ We can use megablast to map the nt ORFs to plasmid database.
 # Workshop
 
 ## 1. Login in to the Amazon cloud
-### for windows users you need to install PuTTy. 
+### For Windows users you need to install PuTTy. 
 You can download it from this website https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html.
  install this "putty-64bit-0.69-installer.msi" on your machine. 
  
  
  
- # Run PuTTy on your computer
+ ### Run PuTTy on your computer
  You will see a screen like this
  ![Putty config screen](img/putty.png)
  
@@ -77,7 +77,7 @@ You can download it from this website https://www.chiark.greenend.org.uk/~sgtath
  You should see a screen like this:
    ![Putty done](img/puttydone.png)
 
-# For Linux/MacOSx
+### For Linux/MacOSx
 Open up the terminal
  ![Terminal mac](img/terminal.png)
  
